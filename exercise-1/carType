@@ -1,0 +1,6 @@
+/*
+EX. 1- 
+Create a variable to store car type, then assign the value BMW to the variable
+*/
+let carType = 'BMW';
+console.log('Car Type:' + carType);
