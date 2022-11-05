@@ -67,7 +67,7 @@ console.log(productEndsWithPro);
  */
 // Task 10. Print the products that are NOT in the favorites array
  
-let productsNotInFavorites = products.filter((product) =>  favorites.find((fav) => {if (fav !== product) return product; }));
+let productsNotInFavorites = products.filter((product) =>  {return !favorites.find((fav) =>  product === fav);});
 console.log(productsNotInFavorites);
 
 // Task 11. Check if all the items in favorites are iPhones (have "iPhone" in the name). Print the boolean output.
@@ -75,10 +75,10 @@ console.log(productsNotInFavorites);
 console.log(favorites.every((items) => items.includes("iPhone")));
  */
 // Task 12. Check if any of the items in favorites contain the number 12 or 13. Print the boolean output.
-/* 
-console.log(favorites.some((items) => items.includes("13")));
-console.log(favorites.some((items) => items.includes("12")));
- */
+
+console.log(favorites.some((items) =>  items.includes("13") || items.includes("12")));
+ 
+ 
 // hint: 
 // 1. push,  2. filter,       3. filter,  4. push,  5. filter,  6. reduce/filter-length
 // 7. map,   8. map + split,  9. filter + string method to check string ending 
