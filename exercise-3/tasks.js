@@ -76,5 +76,38 @@ const addRecipe = (recipes, recipe) => {
 
 // console.log(recipe);
 
-// console.log(addRecipe(getRecipes(), recipe));
-// console.dir(addRecipe(getRecipes(), recipe), {depth: null});
+let recipes = getRecipes();
+// console.dir(recipes, {depth:null});
+
+// console.dir(addRecipe(getRecipes(), recipe, {depth: null}));
+
+// Task: 2. delete a recipe that matches a given name
+/* 
+const deleteRecipe = (recipes, recipeName) => {
+  const updatedList = recipes.filter((item) =>  !item.name.includes(recipeName)); 
+  return updatedList;
+}
+ */
+// let recipeName = "salmon soup";
+// console.dir(deleteRecipe(recipes, recipeName));
+
+// Task: 3. get only vegan recipes
+/* 
+const veganRecipe = (recipes) => {
+  const onlyVegan = recipes.filter((recip) => recip.vegan == true);
+  return onlyVegan;
+}
+
+console.dir(veganRecipe(recipes), {depth: null}); 
+*/
+
+// Task: 4. get the names of the ingredients of a recipe
+const getIngredientNames = (recipes, recipe) => {
+  const recip = recipes.find((recipeName) =>  {if (recipeName.name === recipe ) return recipe;}); 
+  let ingredientName = recip.ingredients.map((x) => x.name);
+  return ingredientName;
+}
+
+let recip = "carbonara";
+
+console.log(getIngredientNames(recipes, recip));
