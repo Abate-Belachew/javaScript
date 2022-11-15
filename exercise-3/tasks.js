@@ -41,7 +41,7 @@ function getRecipes() {
     }];
   }
 
-
+let recipes = getRecipes();
   // Implement functions that perform the following tasks
 
 // Task: 1. Add a new recipe
@@ -76,7 +76,7 @@ const addRecipe = (recipes, recipe) => {
 
 // console.log(recipe);
 
-let recipes = getRecipes();
+// let recipes = getRecipes();
 // console.dir(recipes, {depth:null});
 
 // console.dir(addRecipe(getRecipes(), recipe, {depth: null}));
@@ -104,10 +104,57 @@ console.dir(veganRecipe(recipes), {depth: null});
 // Task: 4. get the names of the ingredients of a recipe
 const getIngredientNames = (recipes, recipe) => {
   const recip = recipes.find((recipeName) =>  {if (recipeName.name === recipe ) return recipe;}); 
-  let ingredientName = recip.ingredients.map((x) => x.name);
+  let ingredientName = recip.ingredients.map((ingrName) => ingrName.name);
   return ingredientName;
 }
 
 let recip = "carbonara";
 
-console.log(getIngredientNames(recipes, recip));
+// console.log(getIngredientNames(recipes, recip));
+
+// Task: 5. add a recipe to favorites
+const addToFavorites = (favorites, recipe) => {
+  // .....
+  favorites.push(recipe);
+  return favorites;
+}
+//const favorites = getRecipes();
+// console.dir(addToFavorites(getRecipes(), recipe));
+
+// Task: 6. remove a recipe from favorites
+function removeFavorite(favorites, recipeName) {
+  //....
+  // use filter
+  //
+  updatedFavorites = favorites.filter((favRecipe) => {
+    return !favRecipe.name.includes(recipeName)});
+  return updatedFavorites;
+}
+
+let salmonRecipe = "salmon soup";
+// console.dir(removeFavorite(getRecipes(), salmonRecipe), {depth: null});
+
+// Task: 7. get the list of names of the items in favorites
+// console.log(favorites.map((recipeName) => {return recipeName.name}));
+
+// Task: 8. edit a recipe - change the name
+// find the recipe by oldName
+  // change the name to newName
+  // this can be done by map
+  // map each recipe to itself. If the name matches, map it to a new object with newName
+function editRecipe(recipes, oldName, newName) {
+/*   let findName = recipes.find((recipeName) => {if ( recipeName.name === oldName )
+  return recipeName;}) */
+  let changeName = recipes.map(recipeName => {
+    if ( recipeName.name.includes(oldName))
+    return {nawName: recipeName.name,
+            vegan: recipeName.vegan,
+            ingredients: recipeName.ingredients
+    };
+    else return recipeName;
+  });
+  return changeName;
+}
+
+console.dir(editRecipe(recipes,"carbonara", "carbo"), {depth:null});
+ 
