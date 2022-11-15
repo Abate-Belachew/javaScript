@@ -143,18 +143,14 @@ let salmonRecipe = "salmon soup";
   // this can be done by map
   // map each recipe to itself. If the name matches, map it to a new object with newName
 function editRecipe(recipes, oldName, newName) {
-/*   let findName = recipes.find((recipeName) => {if ( recipeName.name === oldName )
-  return recipeName;}) */
-  let changeName = recipes.map(recipeName => {
-    if ( recipeName.name.includes(oldName))
-    return {nawName: recipeName.name,
-            vegan: recipeName.vegan,
-            ingredients: recipeName.ingredients
-    };
-    else return recipeName;
+  let changeName = recipes.map(recipe => {
+    if ( recipe.name === oldName) {
+    return {...recipe, name: newName};
+  } else {return recipe};
+  
   });
   return changeName;
 }
 
-console.dir(editRecipe(recipes,"carbonara", "carbo"), {depth:null});
+console.dir(editRecipe(recipes,"carbonara", "carbo"), {depth: null});
  
