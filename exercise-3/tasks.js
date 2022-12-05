@@ -41,7 +41,7 @@ function getRecipes() {
     }];
   }
 
-let recipes = getRecipes();
+const recipes = getRecipes();
   // Implement functions that perform the following tasks
 
 // Task: 1. Add a new recipe
@@ -53,7 +53,7 @@ const addRecipe = (recipes, recipe) => {
   recipes.push(recipe);
   return recipes;
 }
-    
+ /*    
  let recipe = {
   name: "Beef tibs",
   vegan: false,
@@ -72,7 +72,7 @@ const addRecipe = (recipes, recipe) => {
   }
   ]
  }; 
-
+ */
 
 // console.log(recipe);
 
@@ -152,5 +152,26 @@ function editRecipe(recipes, oldName, newName) {
   return changeName;
 }
 
-console.dir(editRecipe(recipes,"carbonara", "carbo"), {depth: null});
- 
+// console.dir(editRecipe(recipes,"carbonara", "carbo"), {depth: null});
+
+// Task: 9. edit a recipe - make it vegan / make it non-vegan
+const toggleVeganStatus = (recipes, recipeName) => { 
+    let editRecipe = recipes.map((recipe) => {
+    if(recipe.name === recipeName && recipe.vegan === false) {return{...recipe, vegan: true};}
+    if (recipe.name === recipeName && recipe.vegan === true) {return{...recipe, vegan: false};}
+    else{return recipe};
+  });
+  return editRecipe;
+  
+} 
+
+// console.dir(toggleVeganStatus(recipes, 'rice bowl'), {depth: null});
+
+// Task: 10. get one recipe by name - return the recipe that matches the exact name of the recipe
+const searchByRecipeName = (recipes, recipeName) => {
+  // use filter
+  let serchByRecipeName = recipes.filter((recipe) => {if (recipe.name === recipeName) return recipe; });
+return serchByRecipeName;
+}
+
+console.dir(searchByRecipeName(recipes, 'rice bowl'), {depth: null});
