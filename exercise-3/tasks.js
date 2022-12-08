@@ -170,8 +170,21 @@ const toggleVeganStatus = (recipes, recipeName) => {
 // Task: 10. get one recipe by name - return the recipe that matches the exact name of the recipe
 const searchByRecipeName = (recipes, recipeName) => {
   // use filter
-  let serchByRecipeName = recipes.filter((recipe) => {if (recipe.name === recipeName) return recipe; });
-return serchByRecipeName;
+  let searchByRecipeName = recipes.filter((recipe) => {if (recipe.name === recipeName) return recipe; });
+return searchByRecipeName;
 }
 
-console.dir(searchByRecipeName(recipes, 'rice bowl'), {depth: null});
+// console.dir(searchByRecipeName(recipes, 'rice bowl'), {depth: null});
+
+// Task: 11. search by ingredient name - return all recipes that contain a given ingredient name
+// use filter and again filter through the ingredients
+
+const searchByIngredientName = (recipes, ingredientName) => {
+  let searchByIngredient = recipes.filter((recipe) => {for (let i = 0; i < recipe.ingredients.length; i++) {
+     if (recipe.ingredients[i].name === ingredientName) {return recipe;}}});
+     return searchByIngredient;
+}
+
+console.dir(searchByIngredientName(recipes, 'rice'), {depth: null});
+
+
