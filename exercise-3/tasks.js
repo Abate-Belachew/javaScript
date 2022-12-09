@@ -185,6 +185,18 @@ const searchByIngredientName = (recipes, ingredientName) => {
      return searchByIngredient;
 }
 
-console.dir(searchByIngredientName(recipes, 'rice'), {depth: null});
+//console.dir(searchByIngredientName(recipes, 'rice'), {depth: null});
 
+// Task: 12. add an ingredient to a recipe
+// add the ingredient to the recipe that matches the recipename
+  // return updatedList;
+  const addIngredient = (recipes, recipeName, ingredient) => {
+    let updatedList = recipes.filter((recipe) => {if (recipe.name === recipeName) 
+        {return recipe.ingredients.push(ingredient)}else{return recipe;};});
+    return updatedList;
+  }
+
+let newIngredient = {name: 'carrot', quantity: 2};
+
+console.dir(addIngredient(recipes, 'rice bowl', newIngredient), {depth: null});
 
