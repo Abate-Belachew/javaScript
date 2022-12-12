@@ -82,14 +82,14 @@ const addRecipe = (recipes, recipe) => {
 // console.dir(addRecipe(getRecipes(), recipe, {depth: null}));
 
 // Task: 2. delete a recipe that matches a given name
-/* 
+ 
 const deleteRecipe = (recipes, recipeName) => {
   const updatedList = recipes.filter((item) =>  !item.name.includes(recipeName)); 
   return updatedList;
 }
- */
-// let recipeName = "salmon soup";
-// console.dir(deleteRecipe(recipes, recipeName));
+
+
+// console.dir(deleteRecipe(recipes, 'salmon soup'));
 
 // Task: 3. get only vegan recipes
 /* 
@@ -103,14 +103,17 @@ console.dir(veganRecipe(recipes), {depth: null});
 
 // Task: 4. get the names of the ingredients of a recipe
 const getIngredientNames = (recipes, recipe) => {
-  const recip = recipes.find((recipeName) =>  {if (recipeName.name === recipe ) return recipe;}); 
-  let ingredientName = recip.ingredients.map((ingrName) => ingrName.name);
-  return ingredientName;
+  const aRecipe = recipes.find((recipeName) =>  {
+    if (recipeName.name === recipe ) {return recipe;}
+  }); 
+
+  let ingredientNames = aRecipe.ingredients.map((ingrName) => ingrName.name);
+  return ingredientNames;
 }
 
-let recip = "carbonara";
 
-// console.log(getIngredientNames(recipes, recip));
+
+// console.log(getIngredientNames(recipes, 'carbonara'));
 
 // Task: 5. add a recipe to favorites
 const addToFavorites = (favorites, recipe) => {
@@ -131,8 +134,8 @@ function removeFavorite(favorites, recipeName) {
   return updatedFavorites;
 }
 
-let salmonRecipe = "salmon soup";
-// console.dir(removeFavorite(getRecipes(), salmonRecipe), {depth: null});
+
+// console.dir(removeFavorite(getRecipes(), 'salmon soup'), {depth: null});
 
 // Task: 7. get the list of names of the items in favorites
 // console.log(favorites.map((recipeName) => {return recipeName.name}));
@@ -146,7 +149,10 @@ function editRecipe(recipes, oldName, newName) {
   let changeName = recipes.map(recipe => {
     if ( recipe.name === oldName) {
     return {...recipe, name: newName};
-  } else {return recipe};
+    } 
+    else {
+      return recipe
+    };
   
   });
   return changeName;
@@ -210,14 +216,20 @@ const searchByIngredientName = (recipes, ingredientName) => {
      return searchByIngredient;
 }
  */
-console.dir(searchByIngredientName(recipes, 'rice'), {depth: null});
+// console.dir(searchByIngredientName(recipes, 'rice'), {depth: null});
 
 // Task: 12. add an ingredient to a recipe
 // add the ingredient to the recipe that matches the recipename
   // return updatedList;
   const addIngredient = (recipes, recipeName, ingredient) => {
-    let updatedList = recipes.filter((recipe) => {if (recipe.name === recipeName) 
-        {return recipe.ingredients.push(ingredient)}else{return recipe;};});
+    let updatedList = recipes.filter((recipe) => {
+      if (recipe.name === recipeName) {
+        return recipe.ingredients.push(ingredient)
+      }
+      else{
+        return recipe;
+      };
+    });
     return updatedList;
   }
 
@@ -225,3 +237,21 @@ let newIngredient = {name: 'carrot', quantity: 2};
 
 //console.dir(addIngredient(recipes, 'rice bowl', newIngredient), {depth: null});
 
+// Task: 13. delete an ingredient from a recipe, 
+  // delete the ingredient of the recipe that matches the recipename
+  // return updatedList;
+const deleteIngredient = (recipes, recipeName, ingredientName) => {
+  let updatedList = []; 
+  recipes.filter((recipe) => {
+    if (recipe.name === recipeName) {
+      updatedList.push({...recipe, ingredients: recipe.ingredients.filter(ingr =>  !ingr.name.includes(ingredientName))});    
+      }
+      else { 
+        updatedList.push(recipe);
+      }
+  });
+  return updatedList;
+}
+       
+
+// console.dir(deleteIngredient(recipes, 'carbonara', 'cheese'), {depth: null});
