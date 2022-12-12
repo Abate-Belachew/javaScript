@@ -155,37 +155,62 @@ function editRecipe(recipes, oldName, newName) {
 // console.dir(editRecipe(recipes,"carbonara", "carbo"), {depth: null});
 
 // Task: 9. edit a recipe - make it vegan / make it non-vegan
-const toggleVeganStatus = (recipes, recipeName) => { 
-    let editRecipe = recipes.map((recipe) => {
-    if(recipe.name === recipeName && recipe.vegan === false) {return{...recipe, vegan: true};}
-    if (recipe.name === recipeName && recipe.vegan === true) {return{...recipe, vegan: false};}
-    else{return recipe};
+const toggleVeganStatus = (recipes, recipeName) => {
+  let editedRecipes = recipes.map((recipe) => {
+    if(recipe.name === recipeName && recipe.vegan === false){
+      return{...recipe, vegan: true};
+    }
+    if (recipe.name === recipeName && recipe.vegan === true) {
+      return{...recipe, vegan: false};
+    } else{
+      return recipe
+    };
+
   });
-  return editRecipe;
+
+  return editedRecipes;
   
 } 
 
 // console.dir(toggleVeganStatus(recipes, 'rice bowl'), {depth: null});
 
 // Task: 10. get one recipe by name - return the recipe that matches the exact name of the recipe
+// use filter
 const searchByRecipeName = (recipes, recipeName) => {
-  // use filter
-  let searchByRecipeName = recipes.filter((recipe) => {if (recipe.name === recipeName) return recipe; });
-return searchByRecipeName;
+  let searchByRecipeName = recipes.filter((recipe) => {
+    if (recipe.name === recipeName) {
+      return recipe;
+    }
+
+  });
+
+  return searchByRecipeName;
 }
 
 // console.dir(searchByRecipeName(recipes, 'rice bowl'), {depth: null});
 
 // Task: 11. search by ingredient name - return all recipes that contain a given ingredient name
 // use filter and again filter through the ingredients
-
+const searchByIngredientName = (recipes, ingredientName) => {
+  let searchByIngredient = [];
+  recipes.filter((recipe) => { recipe.ingredients.forEach((ingredient) => { 
+      if (ingredient.name === ingredientName) {
+        searchByIngredient.push(recipe);
+      }
+    });
+      
+    });
+  return searchByIngredient; 
+} 
+// the above task can be done also by for-loop
+/*
 const searchByIngredientName = (recipes, ingredientName) => {
   let searchByIngredient = recipes.filter((recipe) => {for (let i = 0; i < recipe.ingredients.length; i++) {
      if (recipe.ingredients[i].name === ingredientName) {return recipe;}}});
      return searchByIngredient;
 }
-
-//console.dir(searchByIngredientName(recipes, 'rice'), {depth: null});
+ */
+console.dir(searchByIngredientName(recipes, 'rice'), {depth: null});
 
 // Task: 12. add an ingredient to a recipe
 // add the ingredient to the recipe that matches the recipename
@@ -198,5 +223,5 @@ const searchByIngredientName = (recipes, ingredientName) => {
 
 let newIngredient = {name: 'carrot', quantity: 2};
 
-console.dir(addIngredient(recipes, 'rice bowl', newIngredient), {depth: null});
+//console.dir(addIngredient(recipes, 'rice bowl', newIngredient), {depth: null});
 
