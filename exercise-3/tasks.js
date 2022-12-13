@@ -255,3 +255,31 @@ const deleteIngredient = (recipes, recipeName, ingredientName) => {
        
 
 // console.dir(deleteIngredient(recipes, 'carbonara', 'cheese'), {depth: null});
+
+// Task: 14. edit a recipe - change the quantity of an ingredient
+// find the recipe by name
+  // update the ingredients of the recipe you found to have newQuantity
+  // use map to map each recipe to itself, but if the name matches the recipeName, update the ingredients
+  // return the updated recipes array 
+  const editIngredientQuantity = (recipes, recipeName, ingredientName, newQuantity) => {
+    let updatedRecipes = recipes.map(recipe => { 
+      if (recipe.name === recipeName) { 
+        return {...recipe, ingredients: recipe.ingredients.map(ingredient => {
+          if (ingredient.name.includes(ingredientName)){
+            return{...ingredient, quantity: newQuantity};
+          }
+          else{
+            return ingredient;
+          };
+        })};
+      }
+      else{
+        return recipe;
+      };
+        
+    });
+    return updatedRecipes;
+  }
+  
+console.dir(editIngredientQuantity(recipes, 'carbonara', 'cheese', 4), {depth: null});
+
