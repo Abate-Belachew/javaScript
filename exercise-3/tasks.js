@@ -41,7 +41,7 @@ function getRecipes() {
     }];
   }
 
-const recipes = getRecipes();
+//const recipes = getRecipes();
   // Implement functions that perform the following tasks
 
 // Task: 1. Add a new recipe
@@ -53,7 +53,7 @@ const addRecipe = (recipes, recipe) => {
   recipes.push(recipe);
   return recipes;
 }
- /*    
+  /*    
  let recipe = {
   name: "Beef tibs",
   vegan: false,
@@ -72,48 +72,45 @@ const addRecipe = (recipes, recipe) => {
   }
   ]
  }; 
+
  */
 
-// console.log(recipe);
-
-// let recipes = getRecipes();
-// console.dir(recipes, {depth:null});
-
-// console.dir(addRecipe(getRecipes(), recipe, {depth: null}));
+//console.dir(addRecipe(getRecipes(), recipe, {depth: null}));
 
 // Task: 2. delete a recipe that matches a given name
  
 const deleteRecipe = (recipes, recipeName) => {
-  const updatedList = recipes.filter((item) =>  !item.name.includes(recipeName)); 
+  const updatedList = recipes.filter(recipe => recipe.name !== recipeName); 
   return updatedList;
 }
 
 
-// console.dir(deleteRecipe(recipes, 'salmon soup'));
+//console.dir(deleteRecipe(recipes, 'salmon soup'));
 
 // Task: 3. get only vegan recipes
-/* 
+ 
 const veganRecipe = (recipes) => {
-  const onlyVegan = recipes.filter((recip) => recip.vegan == true);
-  return onlyVegan;
+  const onlyVeganRecipes = recipes.filter((recip) => recip.vegan == true);
+  return onlyVeganRecipes;
 }
 
-console.dir(veganRecipe(recipes), {depth: null}); 
-*/
+//console.dir(veganRecipe(recipes), {depth: null}); 
+
 
 // Task: 4. get the names of the ingredients of a recipe
 const getIngredientNames = (recipes, recipe) => {
-  const aRecipe = recipes.find((recipeName) =>  {
-    if (recipeName.name === recipe ) {return recipe;}
-  }); 
-
-  let ingredientNames = aRecipe.ingredients.map((ingrName) => ingrName.name);
+  const aRecipe = recipes.find((item) =>  {
+    if (item.name === recipe ) {
+      return item;
+    }
+  });
+  let ingredientNames = aRecipe.ingredients.map(ingredient => ingredient.name);
   return ingredientNames;
 }
 
 
 
-// console.log(getIngredientNames(recipes, 'carbonara'));
+//console.log(getIngredientNames(recipes, 'carbonara'));
 
 // Task: 5. add a recipe to favorites
 const addToFavorites = (favorites, recipe) => {
@@ -281,5 +278,115 @@ const deleteIngredient = (recipes, recipeName, ingredientName) => {
     return updatedRecipes;
   }
   
-console.dir(editIngredientQuantity(recipes, 'carbonara', 'cheese', 4), {depth: null});
+//console.dir(editIngredientQuantity(recipes, 'carbonara', 'cheese', 4), {depth: null});
+
+// Task: 15. Execute the functions you implemented above as required below
+const main = () => {
+  let recipes = getRecipes();
+
+  let favorites = [];
+
+  // Task: 15.1
+  // Add the following recipes to the recipes array using the function from Task-1
+  //    Lentil Bolognese, vegan, & Ingredients: 1 lentil; 3 tomatoes; 1 pasta; 1 onion
+  //    Ozzo Chicken, non-vegan, & Ingredients: 1 spinach; 1 chicken; 1 sour cream
+  const lentilBolognese = { 
+    name: 'Lentil Bolognese', 
+    vegan: true,
+    ingredients:[
+      {name: 'lentil', quantity: 1},
+      {name: 'tomatoes', quantity: 3},
+      {name: 'pasta', quantity: 1},
+      {name: 'onion', quantity: 1}
+    ]
+
+  }; // fill in the attributes
+
+  const ozzoChicken = {
+    name: 'Ozzo Chicken',
+    vegan: false,
+    ingredients: [
+      {name: 'spinach', quantity: 1},
+      {name: 'chiken', quantity: 1},
+      {name: 'sour cream', quantity: 1}
+    ]
+  };
+  
+  recipes = addRecipe(recipes,lentilBolognese); // add ozzo chicken in a similar way
+  recipes = addRecipe(recipes, ozzoChicken);
+
+
+  // Task: 15.2
+  // Delete the recipe named "carbonara" using the function from Task-2
+  
+  recipes = deleteRecipe(recipes, 'carbonara');
+
+  // Task: 15.3
+  // Add ingredient "garlic with quantity: 3" to the recipe "salmon soup"
+  // Add ingredient "lentil with quantity: 1" to the recipe "rice bowl"
+  recipes = addIngredient(recipes, 'salmon soup', {name: 'garlic', quantity: 3});
+  recipes = addIngredient(recipes, 'rice bowl', {name: 'lentil', quantity: 1});
+
+  // Task: 15.4
+  // Delete ingredient named "water" from the recipe "rice bowl"
+  recipes = deleteIngredient(recipes, 'rice bowl', 'water');
+
+
+  // Task: 15.5
+  // Get the recipe by the name "Ozzo Chicken" and Add it to favorites
+  // Get the recipe by the name "salmon soup" and Add it to favorites
+  // Get the recipe by the name "Lentil Bolognese" and Add it to favorites
+  const salmonSoup = searchByRecipeName(recipes, 'salmon soup');
+  favorites = addToFavorites(favorites, lentilBolognese);
+  favorites = addToFavorites(favorites, ozzoChicken);
+  favorites = addToFavorites(favorites, salmonSoup);
+
+  // Task: 15.6
+  // Delete the recipe "Lentil Bolognese" from the favorites
+  favorites = deleteRecipe(favorites, 'Lentil Bolognese');
+
+  // Task: 15.7
+  // Change the name of the recipe "rice bowl" to "Japanese Rice Bowl"
+  recipes = editRecipe(recipes, 'rice bowl', 'Japanese Rice Bowl');
+
+  // Task: 15.8
+  // change "rice bowl" to be vegan
+  recipes = toggleVeganStatus(recipes, 'Japanese Rice Bowl');
+
+  // Task: 15.9
+  // change the quantity of the Ingredient lentil to be 2, in  Lentil Bolognese
+  recipes = editIngredientQuantity(recipes, 'Lentil Bolognese', 'lentil', 2);
+
+  // Task: 15.10
+  // call the function you implemented on task-4 to get the list of ingredients of "salmon soup"
+  // console.log these Ingredients
+  // TEST 1: it should print these ingredients: salmon, cream, milk, garlic
+  let ingredientsOfSalmonSoup = getIngredientNames(recipes, 'salmon soup');
+  //console.log(ingredientsOfSalmonSoup);
+
+  // Task: 15.11
+  // console.log all the vegan recipes
+  // TEST 2: It should print the recipe Japanese Rice Bowl
+  //console.dir(veganRecipe(recipes), {depth: null});
+
+
+  // Task: 15.12
+  // console.log all the recipes that contain the ingredient "lentil"
+  // TEST 3: It should print the recipes Japanese Rice Bowl and Lentil Bolognese
+  //console.dir(searchByIngredientName(recipes,'lentil'), {depth: null});
+
+  // Task: 15.12
+  // console.log the favorites array
+  // TEST 4: It should print the recipes "salmon soup" & "Ozzo Chicken"
+  //console.dir(favorites, {depth: null});
+
+  // Task: 15.13
+  // console.log the recipes array
+  // TEST 5: It should print an array of 4 recipes that matches expectedRecipesArray defined below
+  console.dir(recipes, {depth: null});
+}
+
+
+main();
+
 
