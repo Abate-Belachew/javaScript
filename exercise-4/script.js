@@ -5,9 +5,7 @@ function increment () {
 function decrement() {
     document.getElementById('inputNumber').stepDown();
  }
- 
-    
-    
+  
 const formEl = document.querySelector("form");
 const tbodyEl = document.querySelector("tbody");
 const tableEl = document.querySelector("table");
@@ -28,7 +26,7 @@ function onDeletePlayer(event){
 
     }
 
-    const button = e.target;
+    const button = event.target;
     button.closest("tr").remove();
  }
  formEl.addEventListener('submit', onAddPlayer);
